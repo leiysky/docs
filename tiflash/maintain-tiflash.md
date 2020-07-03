@@ -28,7 +28,7 @@ There are two ways to check the TiFlash version:
 - Check the TiFlash version by referring to the TiFlash log. For the log path, see the `[logger]` part in [the `tiflash.toml` file](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file). For example:
 
     ```
-    <information>: TiFlash version: TiFlash 0.2.0 master-375035282451103999f3863c691e2fc2
+    TiFlash version: TiFlash 0.2.0 master-375035282451103999f3863c691e2fc2
     ```
 
 ## TiFlash critical logs
@@ -38,6 +38,17 @@ There are two ways to check the TiFlash version:
 | [ 23 ] `<Information>` KVStore: Start to persist [region 47, applied: term 6 index 10] | Data starts to be replicated (the number in the square brackets at the start of the log refers to the thread ID |
 | [ 30 ] `<Debug>` CoprocessorHandler: grpc::Status DB::CoprocessorHandler::execute() | Handling DAG request, that is, TiFlash starts to handle a Coprocessor request |
 | [ 30 ] `<Debug>` CoprocessorHandler: grpc::Status DB::CoprocessorHandler::execute() | Handling DAG request done, that is, TiFlash finishes handling a Coprocessor request |
+
+> **Notes:**
+>
+> Log format has been changed in TiFlash `4.0.3`.
+> If your TiFlash's version is `>=4.0.3`, the logs are as follows:
+
+| Log Information | Log Description |
+|---------------|-------------------|
+| [2020/06/19 18:00:00.000 +08:00] `[INFO]` ["KVStore : Start to persist [region 47, applied: term 6 index 10]"] [thread_id=23] | Data starts to be replicated (the number in the square brackets at the start of the log refers to the thread ID |
+| [2020/06/19 18:00:00.000 +08:00] `[DEBUG]` ["CoprocessorHandler: grpc::Status DB::CoprocessorHandler::execute()"] [thread_id=30] | Handling DAG request, that is, TiFlash starts to handle a Coprocessor request |
+| [2020/06/19 18:00:00.000 +08:00] `[DEBUG]` ["CoprocessorHandler: grpc::Status DB::CoprocessorHandler::execute()"] [thread_id=30] | Handling DAG request done, that is, TiFlash finishes handling a Coprocessor request |
 
 You can find the beginning or the end of a Coprocessor request, and then locate the related logs of the Coprocessor request through the thread ID printed at the start of the log.
 
